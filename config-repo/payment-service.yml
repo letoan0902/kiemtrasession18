@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${shopmart.mysql.host}:${shopmart.mysql.port}/shopmart_payment_db?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Ho_Chi_Minh
+    username: ${shopmart.mysql.username}
+    password: ${shopmart.mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+eureka:
+  client:
+    webclient:
+      enabled: false
+
+shopmart:
+  payment:
+    slow-delay-seconds: 25
+    kafka:
+      enabled: true
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      order-topic: order
+      payment-topic: payment
+      payment-topic-partitions: 3
+      group-id: payment-service-group
+      auto-offset-reset: earliest
+      commit-interval-ms: 1000
+      commit-batch-size: 10
+      record-retry-attempts: 3
+      record-retry-backoff-ms: 1000

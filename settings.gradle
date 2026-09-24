@@ -1,0 +1,8 @@
+rootProject.name = 'kiemtrasession18'
+
+include 'config-server'
+include 'eureka-server'
+include 'api-gateway'
+include 'order-service'
+include 'inventory-service'
+include 'payment-service'

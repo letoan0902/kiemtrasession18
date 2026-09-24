@@ -1,0 +1,40 @@
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+    instance-id: ${spring.application.name}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+  client:
+    registry-fetch-interval-seconds: 5
+
+spring:
+  cloud:
+    loadbalancer:
+      cache:
+        ttl: 5s
+  kafka:
+    bootstrap-servers: localhost:9092
+
+shopmart:
+  mysql:
+    host: localhost
+    port: 3306
+    username: root
+    password: "123456"
+  config:
+    nguon: config-repo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%15.15thread] %-40.40logger{39} : %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{39} : %msg%n"

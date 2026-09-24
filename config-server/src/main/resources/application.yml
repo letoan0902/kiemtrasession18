@@ -1,0 +1,44 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: ${SHOPMART_CONFIG_REPO:file:./config-repo/}
+
+eureka:
+  client:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${SHOPMART_CONFIG_GIT_URI:file:./}
+          default-label: ${SHOPMART_CONFIG_GIT_LABEL:main}
+          search-paths: ${SHOPMART_CONFIG_GIT_PATHS:config-repo}
+          clone-on-start: true
